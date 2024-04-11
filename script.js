@@ -1,47 +1,51 @@
-const inputBox = document.getElementById("input-box");
-const listContainer = document.getElementById("list-container");
+document.addEventListener("DOMContentLoaded", function() {
+    const inputBox = document.getElementById("input-package");
+    const addButton = document.getElementById("add-button");
+    const recordContainer = document.getElementById("record-container");
 
-// function saveData() {
-//     localStorage.setItem("data", listContainer.innerHTML);
-// }
+    addButton.addEventListener("click", addTask);
+    recordContainer.addEventListener("click", toggleTaskDone);
 
+    function addTask() {
+        const taskText = inputBox.value.trim();
+        if (taskText === '') {
+            alert("You must write something!");
+            return;
+        }
+        
+        const li = document.createElement("li");
+        li.textContent = taskText;
 
+        const deleteButton = document.createElement("span");
+        deleteButton.textContent = "\u00d7";
+        deleteButton.classList.add("delete");
+        li.appendChild(deleteButton);
 
-function addTask() {
-    if (inputBox.value === '') {
-        alert("You must write something!");
-    }
-    else {
-        let li = document.createElement("li");
-        li.innerHTML = inputBox.value;
-        listContainer.appendChild(li);
-        let span = document.createElement("span");
-        span.innerHTML = "\u00d7";
-        li.appendChild(span);
-        // inputBox.value = "";
-        // saveData();
-    }
-
-    inputBox.value = "";
-    saveData();
-}
-
-listContainer.addEventListener("click", function (e) {
-    if (e.target.tagName === "LI") {
-        e.target.classList.toggle("checked");
+        recordContainer.appendChild(li);
+        inputBox.value = ""; // Clear input field
         saveData();
     }
-    else if (e.target.tagName === "SPAN") {
-        e.target.parentElement.remove();
+
+    function toggleTaskDone(event) {
+        const target = event.target;
+        if (target.tagName === "SPAN" && target.classList.contains("delete")) {
+            target.parentElement.remove();
+        } else {
+            target.classList.toggle("done");
+        }
         saveData();
     }
-    // saveData();
-}, false)
 
-function saveData() {
-    localStorage.setItem("data", listContainer.innerHTML);
-}
-function showTask() {
-    listContainer.innerHTML = localStorage.getItem("data");
-}
-showTask();
+    function saveData() {
+        localStorage.setItem("tasks", recordContainer.innerHTML);
+    }
+
+    function loadTasks() {
+        const savedTasks = localStorage.getItem("tasks");
+        if (savedTasks) {
+            recordContainer.innerHTML = savedTasks;
+        }
+    }
+
+    loadTasks();
+});

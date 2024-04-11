@@ -5,31 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TO-DO</title>
     <link rel="stylesheet" href="style.css">
-    
 </head>
 <body>
+    <nav>
+        <h1>TO-DO</h1>
+    </nav>
     
-    <!-- creating TO-DO list -->
-
+    <!-- Creating TO-DO list -->
     <div class="container">
         <div class="todo-app">
-            <h2>TO-DO list<img src="icon.png"></h2>
+            <h2>TO-DO list<img src="https://w7.pngwing.com/pngs/32/64/png-transparent-to-do-list-notebook-computer-icons-action-item-task-android-to-do-list-icon-miscellaneous-angle-text-thumbnail.png"></h2>
             <div class="row">
-                <input type="text" id="input-box" placeholder="Add TO-DO item">
-                <button onclick="addTask()">Add</button>
+                <input type="text" id="input-package" placeholder="Add TO-DO item">
+                <button id="add-button">Add</button>
             </div>
-
-            <ul id="list-container">
-                <!-- <li class="checked">Task 1</li>
-                <li>Task 2</li>
-                <li>Task 3</li>
-                <li>Task 4</li>
-                <li>Task 5</li> -->
+            <ul id="record-container">
+                <!-- List items will be added dynamically -->
             </ul>
         </div>
     </div>
-    <script src="script.js"></script>
-
     
+    <footer>
+        <p>Copyright &copy; 2024</p>
+    </footer>
+    
+    <script src="script.js"></script>
 </body>
 </html>
